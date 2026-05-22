@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../utils/cn';
@@ -8,6 +8,9 @@ import Logo from './Logo';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+  const isSolid = isScrolled || !isHome;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +31,7 @@ export default function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
+        isSolid
           ? 'bg-white/90 dark:bg-brand-darkBg/90 backdrop-blur-md shadow-md py-3'
           : 'bg-transparent py-5'
       )}
@@ -37,7 +40,7 @@ export default function Navbar() {
         <div className="flex-1">
           <Link to="/" className="flex items-center gap-2 group outline-none w-max">
             <Logo 
-              variant={isScrolled ? "auto" : "dark"} 
+              variant={isSolid ? "auto" : "dark"} 
               className="group-hover:opacity-90 transition-opacity drop-shadow-sm" 
             />
           </Link>
@@ -51,7 +54,7 @@ export default function Navbar() {
               to={link.path}
               className={cn(
                 "text-base font-semibold transition-colors",
-                isScrolled 
+                isSolid 
                   ? "text-gray-600 hover:text-brand-electricBlue dark:text-gray-300 dark:hover:text-brand-electricBlue" 
                   : "text-white/90 hover:text-brand-electricBlue"
               )}
@@ -74,7 +77,7 @@ export default function Navbar() {
         <button
           className={cn(
             "lg:hidden transition-colors",
-            isScrolled ? "text-gray-900 dark:text-white" : "text-white"
+            isSolid ? "text-gray-900 dark:text-white" : "text-white"
           )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
