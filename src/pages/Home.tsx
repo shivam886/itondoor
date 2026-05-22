@@ -15,11 +15,12 @@ import ceoPhoto from '../assets/ceo photo/Casual-photo_ITonDoor-scaled-e17633174
 
 import { ImagesSlider } from '../components/ui/ImagesSlider';
 import heroImg1 from '../assets/hero section images/close-up-man-repairing-computer-chips.webp';
-import heroImg2 from '../assets/hero section images/front-view-electronic-handyman.webp';
+import heroImg2 from '../assets/hero section images/front-view-man-repairing-computer.jpg';
 import heroImg3 from '../assets/hero section images/man-repairing-circuit-board-laptop.webp';
 import heroImg4 from '../assets/hero section images/laptop-repair-lab.webp';
 import heroImg5 from '../assets/hero section images/people-repairing-computer-chips.webp';
 import heroImg6 from '../assets/hero section images/technician-repairing-computer-computer-hardware-repairing-upgrade-technology.webp';
+import heroImg7 from '../assets/hero section images/front-view-man-repairing-computer (1).jpg';
 
 import afterHeroImg from '../assets/after herosection/male-technician-repairing-computer-motherboard-wooden-desk.webp';
 
@@ -33,7 +34,7 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
-  const images = [heroImg1, heroImg2, heroImg3, heroImg4, heroImg5, heroImg6];
+  const images = [heroImg1, heroImg2, heroImg3, heroImg4, heroImg5, heroImg6, heroImg7];
 
   return (
     <div className="min-h-screen">
