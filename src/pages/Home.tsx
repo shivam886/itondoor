@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, Maximize2, Minimize2, Calendar, PenTool, CreditCard } from 'lucide-react';
+import { ArrowRight, Star, Calendar, PenTool, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import amexLogo from '../assets/brandlogo/amex-1.webp';
@@ -26,7 +26,6 @@ import afterHeroImg from '../assets/after herosection/male-technician-repairing-
 import { ServicesShowcase } from '../components/ServicesShowcase';
 
 export default function Home() {
-  const [fullBleed, setFullBleed] = useState(true);
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -39,11 +38,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section
-        className={`relative w-full overflow-hidden transition-all duration-500 ease-in-out ${ 
-          fullBleed ? "h-screen" : "h-[70vh] min-h-[600px]" 
-        }`}
-      >
+      <section className="relative w-full h-screen overflow-hidden transition-all duration-500 ease-in-out">
         <ImagesSlider className="h-full" images={images}>
 
 
@@ -237,7 +232,7 @@ export default function Home() {
                     { name: 'Asus', url: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg' },
                     { name: 'Lenovo', url: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Lenovo_logo_2015.svg' },
                     { name: 'Acer', url: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Acer_2011.svg' },
-                    { name: 'Samsung', url: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg' },
+                    { name: 'Samsung', url: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Samsung_wordmark.svg' },
                     { name: 'Microsoft', url: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' }
                   ].map((brand, idx) => (
                     <div key={idx} className="flex items-center justify-center w-28 h-20 md:w-32 md:h-24 bg-white dark:bg-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.05)] border border-gray-100 dark:border-gray-700 rounded-2xl p-4 md:p-6 hover:shadow-lg transition-shadow duration-300">
