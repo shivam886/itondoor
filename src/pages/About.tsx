@@ -1,5 +1,153 @@
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Shield, Clock, Users, ThumbsUp, CheckCircle2 } from 'lucide-react';
+
+const GenerativeArtCanvas = ({ isHovered }: { isHovered: boolean }) => {
+    const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+    React.useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        
+        let animationFrameId: number;
+        let lines: any[] = [];
+        const numLines = 30;
+
+        class Line {
+            x: number; y: number; speed: number; angle: number; length: number;
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.speed = Math.random() * 0.5 + 0.1;
+                this.angle = Math.random() * Math.PI * 2;
+                this.length = Math.random() * 20 + 5;
+            }
+            update() {
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - Math.cos(this.angle) * this.length, this.y - Math.sin(this.angle) * this.length);
+                ctx.strokeStyle = `rgba(0, 85, 255, ${Math.random() * 0.3 + 0.1})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
+        const init = () => {
+            lines = [];
+            for (let i = 0; i < numLines; i++) {
+                lines.push(new Line());
+            }
+        };
+
+        const animate = () => {
+            if (isHovered) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                lines.forEach(line => {
+                    line.update();
+                    line.draw();
+                });
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            animationFrameId = requestAnimationFrame(animate);
+        };
+        
+        canvas.width = 400;
+        canvas.height = 400;
+        init();
+        animate();
+
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [isHovered]);
+
+    return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />;
+};
+
+const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    const mouseXSpring = useSpring(x);
+    const mouseYSpring = useSpring(y);
+
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        x.set((e.clientX - rect.left) / rect.width - 0.5);
+        y.set((e.clientY - rect.top) / rect.height - 0.5);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+        setIsHovered(false);
+    };
+    
+    const cardVariants = {
+        offscreen: { y: 50, opacity: 0 },
+        onscreen: { y: 0, opacity: 1, transition: { type: "spring", bounce: 0.4, duration: 0.8, delay: index * 0.1 } }
+    };
+
+    return (
+        <motion.div
+            variants={cardVariants}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.5 }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() => setIsHovered(true)}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            className="group relative h-[340px] w-full rounded-3xl bg-white dark:bg-gray-800/80 border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition-shadow"
+        >
+            <div 
+                style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
+                className="absolute inset-0 flex flex-col p-8 rounded-3xl overflow-hidden"
+            >
+                <GenerativeArtCanvas isHovered={isHovered} />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/50 to-transparent dark:from-gray-900/90 dark:via-gray-900/50 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none z-0"></div>
+                
+                <div className="relative z-10 h-full flex flex-col pointer-events-none">
+                  <div className="w-16 h-16 rounded-2xl bg-brand-electricBlue/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-electricBlue transition-all duration-300 shadow-sm">
+                    <feature.icon className="w-8 h-8 text-brand-electricBlue group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  
+                  <motion.h3 
+                      initial={{ y: 0 }}
+                      animate={{ y: isHovered ? -5 : 0 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-electricBlue transition-colors"
+                  >
+                      {feature.title}
+                  </motion.h3>
+                  
+                  <motion.p
+                      initial={{ y: 0 }}
+                      animate={{ y: isHovered ? -5 : 0 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.05 }}
+                      className="text-base text-gray-600 dark:text-gray-300 leading-relaxed"
+                  >
+                      {feature.desc}
+                  </motion.p>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 export default function About() {
   const fadeIn = {
@@ -43,19 +191,7 @@ export default function About() {
               { icon: ThumbsUp, title: 'Transparency', desc: 'Upfront pricing with no hidden charges.' },
               { icon: Users, title: 'Customer First', desc: '10,000+ satisfied customers and counting.' }
             ].map((feature, i) => (
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                key={i} 
-                className="bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-100 dark:border-gray-700 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-brand-electricBlue/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-electricBlue transition-all duration-300">
-                  <feature.icon className="w-8 h-8 text-brand-electricBlue group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white transition-colors">{feature.title}</h3>
-                <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-              </motion.div>
+              <FeatureCard key={i} feature={feature} index={i} />
             ))}
           </div>
         </div>
