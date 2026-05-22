@@ -52,8 +52,8 @@ export default function Navbar() {
               className={cn(
                 "text-base font-semibold transition-colors",
                 isScrolled 
-                  ? "text-gray-600 hover:text-brand-electricBlue dark:text-gray-300 dark:hover:text-white" 
-                  : "text-white/80 hover:text-white"
+                  ? "text-gray-600 hover:text-brand-electricBlue dark:text-gray-300 dark:hover:text-brand-electricBlue" 
+                  : "text-white/90 hover:text-brand-electricBlue"
               )}
             >
               {link.name}
