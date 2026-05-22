@@ -310,15 +310,15 @@ export default function Home() {
       </section>
 
       {/* Pricing / On-Door Banner */}
-      <section className="py-20 relative overflow-hidden bg-gradient-to-br from-brand-darkBlue to-brand-electricBlue text-white shadow-2xl">
+      <section className="py-12 relative overflow-hidden bg-gradient-to-br from-brand-darkBlue to-brand-electricBlue text-white shadow-2xl">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
         
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="lg:w-1/2">
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">Transparent Pricing at Your Doorstep</h2>
-              <p className="text-blue-100 mb-8 text-lg font-medium">No hidden fees, no surprise charges. Get upfront estimates before any work begins.</p>
+              <p className="text-blue-100 mb-6 text-lg font-medium">No hidden fees, no surprise charges. Get upfront estimates before any work begins.</p>
               <Link to="/book" className="inline-block bg-white text-brand-electricBlue px-8 py-4 rounded-full font-bold hover:bg-gray-100 hover:-translate-y-1 transition-all shadow-lg">Get a Free Quote</Link>
             </div>
             
