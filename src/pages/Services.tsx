@@ -65,12 +65,13 @@ export default function Services() {
   return (
     <div className="min-h-screen pt-24 bg-gray-50 dark:bg-brand-darkBg">
       {/* Hero */}
-      <section className="py-20 bg-brand-darkBg text-white text-center">
-        <div className="container mx-auto px-4">
+      <section className="relative py-24 bg-brand-darkBg text-white text-center overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-full bg-gradient-to-b from-brand-electricBlue/20 to-transparent opacity-50"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-6"
+            className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6"
           >
             Our <span className="text-brand-electricBlue">Services</span>
           </motion.h1>
@@ -78,7 +79,7 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-medium"
           >
             Professional doorstep tech support for all your IT needs.
           </motion.p>
@@ -96,18 +97,18 @@ export default function Services() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 key={service.id} 
-                className="neumorphic-card p-8 flex flex-col"
+                className="bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col"
               >
-                <div className="neumorphic-icon w-16 h-16 mb-6 mx-0">
-                  <service.icon className="w-8 h-8" />
+                <div className="w-16 h-16 rounded-2xl bg-brand-electricBlue/10 flex items-center justify-center mb-6 group-hover:bg-brand-electricBlue group-hover:scale-110 transition-all duration-300">
+                  <service.icon className="w-8 h-8 text-brand-electricBlue group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 dark:text-white">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-6 flex-grow">{service.desc}</p>
+                <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-electricBlue transition-colors">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-8 flex-grow leading-relaxed font-medium">{service.desc}</p>
                 
-                <ul className="space-y-2 mb-8">
+                <ul className="space-y-3 mb-8">
                   {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
-                      <Check className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
+                    <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium">
+                      <Check className="w-5 h-5 text-brand-electricBlue shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
@@ -115,7 +116,7 @@ export default function Services() {
                 
                 <Link 
                   to="/book" 
-                  className="mt-auto w-full py-3 px-4 bg-gray-50 dark:bg-gray-800 hover:bg-brand-electricBlue hover:text-white text-center rounded-xl font-medium transition-colors border border-gray-100 dark:border-gray-700 group-hover:border-transparent dark:text-gray-300"
+                  className="mt-auto w-full py-3 px-4 bg-gray-50 dark:bg-gray-700/50 text-brand-electricBlue hover:bg-brand-electricBlue hover:text-white dark:text-gray-300 dark:hover:bg-brand-electricBlue text-center rounded-xl font-bold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-brand-electricBlue/20 border border-transparent group-hover:border-brand-electricBlue/20"
                 >
                   Book Service
                 </Link>
@@ -125,19 +126,19 @@ export default function Services() {
         </div>
       </section>
 
-      {/* FAQ Section Placeholder */}
-      <section className="py-20 bg-white dark:bg-[#0B1120]">
-        <div className="container mx-auto px-4 md:px-6 text-center max-w-3xl">
-          <h2 className="text-3xl font-bold mb-10 dark:text-white">Frequently Asked Questions</h2>
-          <div className="text-left space-y-4">
+      {/* FAQ Section */}
+      <section className="py-24 bg-gray-50 dark:bg-[#0B1120]">
+        <div className="container mx-auto px-4 md:px-6 text-center max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-12 text-gray-900 dark:text-white">Frequently Asked Questions</h2>
+          <div className="text-left space-y-6">
              {[
                { q: 'Do you charge a visiting fee?', a: 'We charge a nominal diagnosis fee which is waived off if you proceed with the repair.' },
                { q: 'How long does a repair take?', a: 'Most software and minor hardware issues are resolved within 1-2 hours on-site. Complex motherboard repairs may take 2-3 days at our lab.' },
                { q: 'Do you provide a warranty on repairs?', a: 'Yes, we provide up to 90 days warranty on spare parts and our service.' }
              ].map((faq, i) => (
-                <div key={i} className="neumorphic-card p-6 group">
-                 <h4 className="font-bold text-lg mb-2 dark:text-white">{faq.q}</h4>
-                 <p className="text-gray-600 dark:text-gray-400">{faq.a}</p>
+                <div key={i} className="bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
+                 <h4 className="font-bold text-xl mb-3 text-gray-900 dark:text-white group-hover:text-brand-electricBlue transition-colors">{faq.q}</h4>
+                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed font-medium">{faq.a}</p>
                </div>
              ))}
           </div>

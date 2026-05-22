@@ -1,5 +1,4 @@
-import React from 'react';
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Shield, Clock, Users, ThumbsUp, CheckCircle2 } from 'lucide-react';
 
 const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
