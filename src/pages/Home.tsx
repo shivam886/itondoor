@@ -262,7 +262,7 @@ export default function Home() {
             <p className="text-gray-600 dark:text-gray-400">Get your devices fixed in 3 simple steps.</p>
           </motion.div>
           
-          <div className="flex flex-wrap justify-center gap-8 relative z-10 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10 max-w-6xl mx-auto">
             {[
               { step: 'Step 1', title: 'Book Appointment', desc: 'Schedule a visit online or call us directly.', icon: Calendar },
               { step: 'Step 2', title: 'Technician Visit', desc: 'Our expert arrives at your doorstep to diagnose.', icon: PenTool },
