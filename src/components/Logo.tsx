@@ -38,7 +38,7 @@ export default function Logo({ className, variant = 'auto', iconOnly = false }: 
       </div>
       
       {/* Blue Underline */}
-      <div className="w-[65%] h-[2px] ml-auto mr-[5%] mt-[2px] rounded-full" style={{
+      <div className="w-[68%] h-[2px] ml-auto mr-[14px] mt-[2px] rounded-full" style={{
         background: "linear-gradient(90deg, transparent 0%, #0055ff 15%, #0055ff 100%)"
       }}></div>
       
