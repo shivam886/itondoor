@@ -1,0 +1,9 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#FFFFFF" />
+    <g transform="translate(50, 40)">
+      <rect x="15" y="20" width="70" height="50" rx="4" stroke="#2563EB" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 30 85 L 70 85" stroke="#2563EB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 50 70 L 50 85" stroke="#2563EB" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+    <text x="100" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="32" letter-spacing="-1" fill="#0F172A">ITon<tspan fill="#2563EB">Door</tspan></text>
+  </svg>
