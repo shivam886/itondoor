@@ -118,14 +118,8 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
                 style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
                 className="absolute inset-4 flex flex-col p-6 rounded-2xl overflow-hidden"
             >
-                <img 
-                    src={feature.image}
-                    alt={feature.title}
-                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110 opacity-60 dark:opacity-40"
-                    onError={(e: any) => { e.target.onerror = null; e.target.src='https://placehold.co/400x400/000000/ffffff?text=Image'; }}
-                />
                 <GenerativeArtCanvas isHovered={isHovered} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20 dark:from-black/90 dark:via-black/70 dark:to-black/40 transition-opacity duration-500 rounded-2xl pointer-events-none z-0"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-900/80 to-gray-800/90 dark:from-brand-darkBg/90 dark:via-brand-darkBg/80 dark:to-gray-900/90 transition-opacity duration-500 rounded-2xl pointer-events-none z-0"></div>
                 
                 <div className="relative z-10 h-full flex flex-col justify-end pointer-events-none">
                   <div className="w-14 h-14 rounded-2xl bg-brand-electricBlue/20 backdrop-blur-md border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-brand-electricBlue transition-all duration-300 shadow-lg">
@@ -190,12 +184,12 @@ export default function About() {
       {/* Feature Cards */}
       <section className="py-24 relative z-20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
-              { icon: Shield, title: 'Expertise', desc: 'Certified technicians with 10+ years of experience.', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=400&auto=format&fit=crop' },
-              { icon: Clock, title: 'Reliability', desc: 'Same-day doorstep service you can count on.', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=400&auto=format&fit=crop' },
-              { icon: ThumbsUp, title: 'Transparency', desc: 'Upfront pricing with no hidden charges.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=400&auto=format&fit=crop' },
-              { icon: Users, title: 'Customer First', desc: '10,000+ satisfied customers and counting.', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=400&auto=format&fit=crop' }
+              { icon: Shield, title: 'Expertise', desc: 'Certified technicians with 10+ years of experience.' },
+              { icon: Clock, title: 'Reliability', desc: 'Same-day doorstep service you can count on.' },
+              { icon: ThumbsUp, title: 'Transparency', desc: 'Upfront pricing with no hidden charges.' },
+              { icon: Users, title: 'Customer First', desc: '10,000+ satisfied customers and counting.' }
             ].map((feature, i) => (
               <FeatureCard key={i} feature={feature} index={i} />
             ))}
