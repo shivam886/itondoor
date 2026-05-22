@@ -19,8 +19,8 @@ const GenerativeArtCanvas = ({ isHovered }: { isHovered: boolean }) => {
         class Line {
             x: number; y: number; speed: number; angle: number; length: number;
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
+                this.x = Math.random() * canvas!.width;
+                this.y = Math.random() * canvas!.height;
                 this.speed = Math.random() * 0.5 + 0.1;
                 this.angle = Math.random() * Math.PI * 2;
                 this.length = Math.random() * 20 + 5;
@@ -28,18 +28,18 @@ const GenerativeArtCanvas = ({ isHovered }: { isHovered: boolean }) => {
             update() {
                 this.x += Math.cos(this.angle) * this.speed;
                 this.y += Math.sin(this.angle) * this.speed;
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
+                if (this.x < 0 || this.x > canvas!.width || this.y < 0 || this.y > canvas!.height) {
+                    this.x = Math.random() * canvas!.width;
+                    this.y = Math.random() * canvas!.height;
                 }
             }
             draw() {
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(this.x - Math.cos(this.angle) * this.length, this.y - Math.sin(this.angle) * this.length);
-                ctx.strokeStyle = `rgba(0, 85, 255, ${Math.random() * 0.3 + 0.1})`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
+                ctx!.beginPath();
+                ctx!.moveTo(this.x, this.y);
+                ctx!.lineTo(this.x - Math.cos(this.angle) * this.length, this.y - Math.sin(this.angle) * this.length);
+                ctx!.strokeStyle = `rgba(0, 85, 255, ${Math.random() * 0.3 + 0.1})`;
+                ctx!.lineWidth = 1;
+                ctx!.stroke();
             }
         }
 
@@ -52,13 +52,13 @@ const GenerativeArtCanvas = ({ isHovered }: { isHovered: boolean }) => {
 
         const animate = () => {
             if (isHovered) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
                 lines.forEach(line => {
                     line.update();
                     line.draw();
                 });
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
             }
             animationFrameId = requestAnimationFrame(animate);
         };
@@ -99,7 +99,7 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
     
     const cardVariants = {
         offscreen: { y: 50, opacity: 0 },
-        onscreen: { y: 0, opacity: 1, transition: { type: "spring", bounce: 0.4, duration: 0.8, delay: index * 0.1 } }
+        onscreen: { y: 0, opacity: 1, transition: { type: "spring" as const, bounce: 0.4, duration: 0.8, delay: index * 0.1 } }
     };
 
     return (
@@ -116,21 +116,27 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
         >
             <div 
                 style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
-                className="absolute inset-0 flex flex-col p-8 rounded-3xl overflow-hidden"
+                className="absolute inset-4 flex flex-col p-6 rounded-2xl overflow-hidden"
             >
+                <img 
+                    src={feature.image}
+                    alt={feature.title}
+                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110 opacity-60 dark:opacity-40"
+                    onError={(e: any) => { e.target.onerror = null; e.target.src='https://placehold.co/400x400/000000/ffffff?text=Image'; }}
+                />
                 <GenerativeArtCanvas isHovered={isHovered} />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/50 to-transparent dark:from-gray-900/90 dark:via-gray-900/50 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none z-0"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20 dark:from-black/90 dark:via-black/70 dark:to-black/40 transition-opacity duration-500 rounded-2xl pointer-events-none z-0"></div>
                 
-                <div className="relative z-10 h-full flex flex-col pointer-events-none">
-                  <div className="w-16 h-16 rounded-2xl bg-brand-electricBlue/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-electricBlue transition-all duration-300 shadow-sm">
-                    <feature.icon className="w-8 h-8 text-brand-electricBlue group-hover:text-white transition-colors duration-300" />
+                <div className="relative z-10 h-full flex flex-col justify-end pointer-events-none">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-electricBlue/20 backdrop-blur-md border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-brand-electricBlue transition-all duration-300 shadow-lg">
+                    <feature.icon className="w-7 h-7 text-white group-hover:text-white transition-colors duration-300 drop-shadow-md" />
                   </div>
                   
                   <motion.h3 
                       initial={{ y: 0 }}
                       animate={{ y: isHovered ? -5 : 0 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                      className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-electricBlue transition-colors"
+                      className="text-xl font-bold mb-2 text-white group-hover:text-brand-electricBlue transition-colors drop-shadow-md"
                   >
                       {feature.title}
                   </motion.h3>
@@ -139,7 +145,7 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
                       initial={{ y: 0 }}
                       animate={{ y: isHovered ? -5 : 0 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 20, delay: 0.05 }}
-                      className="text-base text-gray-600 dark:text-gray-300 leading-relaxed"
+                      className="text-sm text-gray-300 leading-relaxed drop-shadow-md"
                   >
                       {feature.desc}
                   </motion.p>
@@ -186,10 +192,10 @@ export default function About() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Shield, title: 'Expertise', desc: 'Certified technicians with 10+ years of experience.' },
-              { icon: Clock, title: 'Reliability', desc: 'Same-day doorstep service you can count on.' },
-              { icon: ThumbsUp, title: 'Transparency', desc: 'Upfront pricing with no hidden charges.' },
-              { icon: Users, title: 'Customer First', desc: '10,000+ satisfied customers and counting.' }
+              { icon: Shield, title: 'Expertise', desc: 'Certified technicians with 10+ years of experience.', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=400&auto=format&fit=crop' },
+              { icon: Clock, title: 'Reliability', desc: 'Same-day doorstep service you can count on.', image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=400&auto=format&fit=crop' },
+              { icon: ThumbsUp, title: 'Transparency', desc: 'Upfront pricing with no hidden charges.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=400&auto=format&fit=crop' },
+              { icon: Users, title: 'Customer First', desc: '10,000+ satisfied customers and counting.', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=400&auto=format&fit=crop' }
             ].map((feature, i) => (
               <FeatureCard key={i} feature={feature} index={i} />
             ))}
