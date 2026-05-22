@@ -45,14 +45,7 @@ export default function Home() {
         }`}
       >
         <ImagesSlider className="h-full" images={images}>
-        {/* Height Toggle */}
-        <button
-          onClick={() => setFullBleed(!fullBleed)}
-          aria-label={fullBleed ? "Switch to fit-to-content" : "Switch to full-bleed"}
-          className="absolute top-24 right-4 md:right-8 z-50 p-2.5 rounded-[10px] backdrop-blur-xl border border-white/20 bg-black/40 text-white hover:bg-black/60 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-electricBlue"
-        >
-          {fullBleed ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-        </button>
+
 
         {/* Hero Content */}
         <div className="relative z-50 flex flex-col items-center justify-center w-full text-center px-4 md:px-6 pt-16 md:pt-0">
@@ -62,14 +55,16 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             {/* Tagline Pill */}
-            <div className="inline-flex items-center gap-2.5 h-[38px] px-3.5 rounded-full backdrop-blur-xl border border-brand-electricBlue/50 bg-black/40 shadow-[0_0_20px_rgba(59,130,246,0.15),inset_0_1px_0_rgba(255,255,255,0.08)]">
-              <span className="bg-brand-electricBlue text-white font-medium text-xs px-2.5 py-1 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.4)] flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                Available Now
-              </span>
-              <span className="font-medium text-sm text-white tracking-wide">
-                Doorstep IT Support in Delhi NCR
-              </span>
+            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-md border border-white/20 bg-white/10 shadow-2xl">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-white font-semibold text-sm tracking-wide">Available Now</span>
+              </div>
+              <span className="w-px h-4 bg-white/30"></span>
+              <span className="text-gray-200 font-medium text-sm tracking-wide">Doorstep IT Support in Delhi NCR</span>
             </div>
           </motion.div>
 
