@@ -1,64 +1,6 @@
-import React from 'react';
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { Smartphone, MonitorUp, Wifi, Database, Download, ShieldAlert, Printer, HardDrive, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Smartphone, MonitorUp, Wifi, Database, Download, ShieldAlert, Printer, HardDrive, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const ServiceCard = ({ service, index }: { service: any, index: number }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
-
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        x.set((e.clientX - rect.left) / rect.width - 0.5);
-        y.set((e.clientY - rect.top) / rect.height - 0.5);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-            className="bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-shadow duration-300 flex flex-col group h-full"
-        >
-            <div className="w-16 h-16 rounded-2xl bg-brand-electricBlue/10 flex items-center justify-center mb-6 group-hover:bg-brand-electricBlue group-hover:scale-110 transition-all duration-300">
-                <service.icon className="w-8 h-8 text-brand-electricBlue group-hover:text-white transition-colors duration-300" />
-            </div>
-            <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-electricBlue transition-colors">{service.title}</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-8 flex-grow leading-relaxed font-medium">{service.desc}</p>
-            
-            <ul className="space-y-3 mb-8">
-                {service.features.map((feature: string, idx: number) => (
-                <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium">
-                    <Check className="w-5 h-5 text-brand-electricBlue shrink-0" />
-                    <span>{feature}</span>
-                </li>
-                ))}
-            </ul>
-            
-            <Link 
-                to="/book" 
-                className="mt-auto w-full py-3 px-4 bg-gray-50 dark:bg-gray-700/50 text-brand-electricBlue hover:bg-brand-electricBlue hover:text-white dark:text-gray-300 dark:hover:bg-brand-electricBlue text-center rounded-xl font-bold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-brand-electricBlue/20 border border-transparent group-hover:border-brand-electricBlue/20"
-            >
-                Book Service
-            </Link>
-        </motion.div>
-    );
-};
 
 export default function Services() {
   const services = [
@@ -149,7 +91,36 @@ export default function Services() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
-              <ServiceCard key={service.id} service={service} index={i} />
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                key={service.id} 
+                className="bg-white dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 p-8 rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-brand-electricBlue/10 flex items-center justify-center mb-6 group-hover:bg-brand-electricBlue group-hover:scale-110 transition-all duration-300">
+                  <service.icon className="w-8 h-8 text-brand-electricBlue group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-electricBlue transition-colors">{service.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-8 flex-grow leading-relaxed font-medium">{service.desc}</p>
+                
+                <ul className="space-y-3 mb-8">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 font-medium group/item">
+                      <ChevronRight className="w-4 h-4 text-brand-electricBlue shrink-0 mt-0.5 group-hover/item:translate-x-1 transition-transform" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <Link 
+                  to="/book" 
+                  className="mt-auto w-full py-3 px-4 bg-gray-50 dark:bg-gray-700/50 text-brand-electricBlue hover:bg-brand-electricBlue hover:text-white dark:text-gray-300 dark:hover:bg-brand-electricBlue text-center rounded-xl font-bold transition-all duration-300 group-hover:shadow-lg group-hover:shadow-brand-electricBlue/20 border border-transparent group-hover:border-brand-electricBlue/20"
+                >
+                  Book Service
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
