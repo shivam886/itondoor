@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Settings, Smartphone, Wifi, MonitorUp, CheckCircle2, UserCheck, Star, Maximize2, Minimize2, Calendar, PenTool, CreditCard } from 'lucide-react';
+import { ArrowRight, Star, Maximize2, Minimize2, Calendar, PenTool, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import amexLogo from '../assets/brandlogo/amex-1.webp';
@@ -17,7 +17,7 @@ import { ImagesSlider } from '../components/ui/ImagesSlider';
 import heroImg1 from '../assets/hero section images/close-up-man-repairing-computer-chips.webp';
 import heroImg2 from '../assets/hero section images/front-view-electronic-handyman.webp';
 import heroImg3 from '../assets/hero section images/man-repairing-circuit-board-laptop.webp';
-import heroImg4 from '../assets/hero section images/master-uses-small-suction-cup-change-battery-cells-from-broken-laptop-repair-clean-it-his-laboratory-with-specific-toolkit-wooden-table-around.webp';
+import heroImg4 from '../assets/hero section images/laptop-repair-lab.webp';
 import heroImg5 from '../assets/hero section images/people-repairing-computer-chips.webp';
 import heroImg6 from '../assets/hero section images/technician-repairing-computer-computer-hardware-repairing-upgrade-technology.webp';
 
@@ -27,7 +27,6 @@ import { ServicesShowcase } from '../components/ServicesShowcase';
 
 export default function Home() {
   const [fullBleed, setFullBleed] = useState(true);
-  const VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260210_031346_d87182fb-b0af-4273-84d1-c6fd17d6bf0f.mp4";
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
