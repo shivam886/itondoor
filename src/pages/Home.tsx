@@ -376,7 +376,7 @@ export default function Home() {
             </motion.div>
             <motion.div {...fadeIn} className="w-full md:w-2/3">
               <h2 className="text-3xl font-bold mb-6 dark:text-white">Our Vision</h2>
-              <blockquote className="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+              <blockquote className="text-justify md:text-left text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                 "Our mission is to become Delhi NCR's most trusted doorstep IT support brand by delivering fast, reliable, and transparent tech solutions."
               </blockquote>
               <div>
