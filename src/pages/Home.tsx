@@ -132,7 +132,7 @@ export default function Home() {
                 <h2 className="text-[26px] md:text-[34px] font-bold text-gray-900 dark:text-white leading-[1.3] mb-5">
                   A Trusted Name To Customers Over <span className="text-brand-electricBlue">10+ Years</span> For Quality Computer Repair Service.
                 </h2>
-                <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-8 leading-[1.8] font-normal">
+                <p className="text-justify md:text-left text-gray-600 dark:text-gray-400 text-sm md:text-base mb-8 leading-[1.8] font-normal">
                   We have been in the repair and service business for over a decade. We have an experienced service department ready to handle all of your repair tasks. Our team will get your device working with a guarantee.
                 </p>
                 <Link to="/about" className="inline-block bg-brand-electricBlue hover:bg-brand-darkBlue text-white font-bold px-8 py-3.5 transition-colors tracking-[1px] text-[13px] uppercase shadow-lg shadow-brand-electricBlue/25">
