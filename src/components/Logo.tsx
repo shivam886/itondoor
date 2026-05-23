@@ -44,7 +44,7 @@ export default function Logo({ className, variant = 'auto', iconOnly = false }: 
       
       {/* Subtext */}
       {!iconOnly && (
-        <div className="text-[#6b7280] text-[9.5px] font-semibold tracking-[0.12em] mt-[3px] ml-6">
+        <div className="text-[#6b7280] text-[7.5px] font-semibold tracking-[0.15em] mt-[3px] ml-6">
           YOUR DOORSTEP IT PARTNER
         </div>
       )}
