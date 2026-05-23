@@ -153,8 +153,8 @@ export function ServicesShowcase() {
                 `}
               />
 
-              <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="flex-1 min-w-0">
+              <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex-1 min-w-0 w-full">
                   {/* Title with animated underline */}
                   <div className="inline-flex items-center gap-2">
                     <h3 className="text-gray-900 dark:text-white font-semibold text-xl tracking-tight">
@@ -179,7 +179,7 @@ export function ServicesShowcase() {
                         ${
                           hoveredIndex === index
                             ? "opacity-100 translate-x-0 translate-y-0"
-                            : "opacity-0 -translate-x-2 translate-y-2"
+                            : "opacity-100 sm:opacity-0 -translate-x-2 translate-y-2 sm:-translate-x-2 sm:translate-y-2"
                         }
                       `}
                     />
@@ -200,8 +200,8 @@ export function ServicesShowcase() {
                 {/* Badge */}
                 <span
                   className={`
-                    inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase
-                    transition-all duration-300 ease-out
+                    w-max inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase
+                    transition-all duration-300 ease-out mt-2 sm:mt-0
                     ${hoveredIndex === index 
                       ? "bg-brand-electricBlue text-white shadow-md shadow-brand-electricBlue/20" 
                       : "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"}
