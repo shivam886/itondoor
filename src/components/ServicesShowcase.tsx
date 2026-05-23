@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
 
+import laptopImg from '../assets/Our Doorstep Services/laptop tech support.jpg'
+import desktopImg from '../assets/Our Doorstep Services/desktop support.jpg'
+import networkingImg from '../assets/Our Doorstep Services/Networking support.jpg'
+
 interface Service {
   title: string
   description: string
@@ -15,21 +19,21 @@ const services: Service[] = [
     description: "Screen replacement, hardware upgrades, virus removal, data recovery.",
     badge: "FAST",
     link: "/services",
-    image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?q=80&w=2574&auto=format&fit=crop",
+    image: laptopImg,
   },
   {
     title: "Desktop Support",
     description: "Motherboard repair, power supply fixes, custom PC building, OS installation.",
     badge: "PRO",
     link: "/services",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2670&auto=format&fit=crop",
+    image: desktopImg,
   },
   {
     title: "Networking Support",
     description: "WiFi setup, router configuration, LAN networking, CCTV installation.",
     badge: "24/7",
     link: "/services",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2668&auto=format&fit=crop",
+    image: networkingImg,
   },
   {
     title: "Printer & Scanner",
